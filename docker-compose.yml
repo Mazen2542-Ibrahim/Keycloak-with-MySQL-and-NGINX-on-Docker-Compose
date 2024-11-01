@@ -1,6 +1,8 @@
 services:
   mysql:
     image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -15,6 +17,8 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:25.0
+    container_name: keycloak
+    restart: unless-stopped
     depends_on:
       - mysql
     environment:
@@ -47,6 +51,8 @@ services:
 
   nginx:
     image: nginx:1.27.2
+    container_name: nginx
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
